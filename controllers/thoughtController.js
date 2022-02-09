@@ -60,7 +60,7 @@ module.exports = {
             { runValidators: true, new: true }
         )
         .select('-__v')
-        .then((thought) => !thought ? res.status(404).json({ message: 'No thought with that ID' }) : res.json(thought))
+        .then((thought) => !thought ? res.status(404).json({ message: 'No thought with that ID' }) : res.json({ message: 'Reaction removed' }))
         .catch((err) => res.status(500).json(err));
     }
 }
