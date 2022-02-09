@@ -7,14 +7,15 @@ const reactionSchema = new mongoose.Schema({
     reactionBody: {
         type: String,
         required: true,
-        // TODO 280 character maximum
+        maxlength: 280
     },
     username: {
         type: String,
         required: true
     },
     createdAt: {
-        // TODO Date, default value to current timestamp, use a getter method to format the timestamp on query
+        type: Date,
+        default: Date.now,
     }
 })
 
@@ -22,26 +23,24 @@ const thoughtSchema = new mongoose.Schema({
     thoughtText: {
         type: String,
         required: true,
-        // TODO must be between 1 and 280 characters
+        minlength: 1,
+        maxlength: 280
     },
     createdAt: {
-        // TODO Date, default value to current timestamp, use a getter method to format the timestamp on query
+        type: Date,
+        default: Date.now,
     },
     username: {
         type: String,
         required: true
     },
-    reactions: [
-        {
-            // TODO documents created with the reactionSchema
-        }
-    ]
+    reactions: [reactionSchema]
 });
 
 thoughtSchema.virtual('reactionCount')
-.get(function() {
-    return this.reactions.length;
-});
+    .get(function () {
+        return this.reactions.length;
+    });
 
 const Thought = mongoose.model('Thought', thoughtSchema);
 
