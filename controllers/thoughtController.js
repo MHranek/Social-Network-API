@@ -10,7 +10,6 @@ module.exports = {
     },
     postThought(req, res) {
         Thought.create(req.body)
-        .select('-__v')
             .then((thought) => {
                 User.findOneAndUpdate(
                     { _id: req.body.userId },

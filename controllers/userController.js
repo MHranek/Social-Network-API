@@ -11,7 +11,6 @@ module.exports = {
     },
     createUser(req, res) {
         User.create(req.body)
-            .select('-__v')
             .then((user) => res.json(user))
             .catch((err) => res.status(500).json(err));
     },
