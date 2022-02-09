@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 
 const reactionSchema = new mongoose.Schema({
     reactionId: {
-        // TODO type of objectId, default value is a new objectId
+        type: Schema.Types.ObjectId,
+        default: () => new Types.ObjectId()
     },
     reactionBody: {
         type: String,
